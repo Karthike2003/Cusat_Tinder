@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import './ValentinesForm.css'; // Import your CSS file for styling
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { app } from './firebaseConfig';
+
+// Assuming you have initialized your Firebase app appropriately
+
+const db = getFirestore(app);
 
 const ValentinesForm = () => {
   const [formData, setFormData] = useState({
     name: '',
-   instagramId: '',
-    
+    gender: '', // Add gender to your formData
+    instagramId: '',
   });
 
   const handleChange = (e) => {
@@ -16,10 +21,16 @@ const ValentinesForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted:', formData);
+
+    try {
+      // Add a new document with a generated id to the "valentines" collection
+      const docRef = await addDoc(collection(db, 'matchdata'), formData);
+      console.log('Document written with ID: ', docRef.id);
+    } catch (error) {
+      console.error('Error adding document: ', error);
+    }
   };
 
   return (
@@ -36,29 +47,38 @@ const ValentinesForm = () => {
           required
         />
 
-<div>
-  <label>Gender:</label>
-  <div>
-    <input type="radio" id="male" name="gender" value="male" />
-    <label htmlFor="male">Male</label>
+        <div>
+          <label>Gender:</label>
+          <div>
+            <input
+              type="radio"
+              id="male"
+              name="gender"
+              value="male"
+              onChange={handleChange}
+            />
+            <label htmlFor="male">Male</label>
 
-    <input type="radio" id="female" name="gender" value="female" />
-    <label htmlFor="female">Female</label>
-  </div>
-  <label htmlFor="instagramId">Instagram ID:</label>
-      <input
-        type="text"
-        id="instagramId"
-        name="instagramId"
-        value={formData.instagramId}
-        onChange={handleChange}
-        required
-      />
+            <input
+              type="radio"
+              id="female"
+              name="gender"
+              value="female"
+              onChange={handleChange}
+            />
+            <label htmlFor="female">Female</label>
+          </div>
 
-</div>
-
-
-
+          <label htmlFor="instagramId">Instagram ID:</label>
+          <input
+            type="text"
+            id="instagramId"
+            name="instagramId"
+            value={formData.instagramId}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <button type="submit">Send Love</button>
       </form>
