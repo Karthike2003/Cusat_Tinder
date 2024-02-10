@@ -4,10 +4,16 @@ import { app,messaging} from '../firebaseConfig';
 import {getToken} from 'firebase/messaging';
 import { onMessage} from 'firebase/messaging';
 import {  updateDoc } from 'firebase/firestore';
+import NoDate from './NoDate';
+
 
 const db = getFirestore(app);
 
-const ValentinesForm = ({onMatchFound}) => {
+const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
+    const [docset, setDocset] = useState([{}]);
+  
+  
+    
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -45,10 +51,11 @@ const ValentinesForm = ({onMatchFound}) => {
     }
 
     try {
-      // console.log(formData,"formdataaaaaaaaaaaaaaaaaaaaaaa")
+      
       const docRef = await addDoc(collection(db, 'matchdata'), formData);
       console.log('Document written with ID: ', docRef.id);
-      window.alert('Let\'s see who your date is!');
+    localStorage.setItem('formData', JSON.stringify(formData));
+      window.alert('Let\'s see who your date is!✌️');
       window.location.reload();
 
       // No need to call matchAlgorithm here; useEffect will handle it
@@ -75,12 +82,12 @@ const ValentinesForm = ({onMatchFound}) => {
     
       if (querySnapshot.size > 0) {
         await Promise.all(querySnapshot.docs.map(async (doc) => {
-          // console.log(doc, "docccccccc");
+          
           await updateDoc(doc.ref, { matched: true });
         }));
-        // console.log('Matched flag updated for all documents where doc.instagramId matches', documentId);
-      } else {
-        // console.log('No matching documents found');
+       
+      } else {//console.log("no document found");
+        
       }
     } catch (error) {
       console.error('Error updating matched flag: ', error);
@@ -89,8 +96,12 @@ const ValentinesForm = ({onMatchFound}) => {
   
   
 
-
+  const storedData = localStorage.getItem('formData');
   useEffect(() => {
+  
+    
+   
+
     const matchAlgorithm = async () => {
       try {
         const q = query(collection(db, 'matchdata'));
@@ -125,6 +136,8 @@ const ValentinesForm = ({onMatchFound}) => {
             updateMatchedFlag(match.boy.instagramId);
   
             onMatchFound();
+            setMatchDetails(match);
+           
             matchedProfiles.push(match);
             matchedBoys.push(randomBoy.instagramId);
             matchedGirls.push(girl.instagramId)
@@ -141,31 +154,12 @@ const ValentinesForm = ({onMatchFound}) => {
         console.error('Error fetching documents: ', error);
       }
     };
-    //request permission for notifications
+   
 
-    async function requestNotificationPermission() {
-      try {
-        const permission = await Notification.requestPermission();
-        // console.log(object)
-        if (permission === 'granted') {
-          try {
-           
-          const token = await getToken(messaging, {vapidKey: "BFvK8scPQnNt8u18J95FuWrROt5djiYcu-RhVzlTffm5ecXeBQh7Wn3RkF5sD3nRX4LslgXBEnEfbRcPU9ydY9w"});
-             
-          } catch (error) {
-            console.error('Error getting token:', error);
-          }
-        } else if (permission === 'denied') {
-          alert('You denied the notification permission.');
-        }
-      } catch (error) {
-        console.
-error('Error requesting notification permission: ', error);
-      }
-    }
+    
     
     matchAlgorithm();
-    requestNotificationPermission();
+   
     const unsubscribe = onMessage(messaging, (payload) => {
 
   });
@@ -176,10 +170,15 @@ error('Error requesting notification permission: ', error);
 
 
   return (
-    <div className="valentines-form-container">
-      <h2>Spread the Love! 💖</h2>
+   <>
+   
+    {storedData ? 
+    (<NoDate/> ): 
+   
+    ( <div className="valentines-form-container">
+      <h2>Find Your Date 🧑‍❤️‍👩</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Your Name:</label>
+        <label htmlFor="name">Name:</label>
         <input
           type="text"
           id="name"
@@ -190,9 +189,9 @@ error('Error requesting notification permission: ', error);
         />
 
         <div>
-          <label>Your Gender:</label>
+          <label>Gender</label>
           <div className='gender'>
-            <label htmlFor="male">Male</label>
+            <label htmlFor="male">Romeo</label>
             <input
               type="radio"
               id="male"
@@ -201,7 +200,7 @@ error('Error requesting notification permission: ', error);
               onChange={handleChange}
             />
            
-           <label htmlFor="female">Female</label>
+           <label htmlFor="female">Juliet</label>
 
             <input
               type="radio"
@@ -226,6 +225,8 @@ error('Error requesting notification permission: ', error);
         <button type="submit">Send Love</button>
       </form>
     </div>
+    )}
+    </>
   );
 };
 

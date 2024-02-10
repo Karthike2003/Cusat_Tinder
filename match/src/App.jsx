@@ -6,18 +6,23 @@ import MyDate from './Components/MyDate';
 
 const App = () => {
   const [matchFound, setMatchFound] = useState(false);
+  const [matchDetails, setMatchDetails] = useState({});
+
+
 
   const handleMatchFound = useCallback(() => {
     setMatchFound(true);
+   
     console.log("match found!showing mydate page");
   }, []);
+  
 
   return (
     <div>
       {matchFound ? (
-        <MyDate  />
+        <MyDate  matchDetails={matchDetails}/>
       ) : (
-        <ValentinesForm onMatchFound={handleMatchFound} />
+        <ValentinesForm onMatchFound={handleMatchFound} setMatchDetails={setMatchDetails} />
       )}
     </div>
   );
