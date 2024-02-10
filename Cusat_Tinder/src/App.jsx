@@ -1,4 +1,5 @@
 import React,{useState,useCallback} from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 import ValentinesForm from './Components/ValentinesForm';
 
@@ -19,7 +20,7 @@ const App = () => {
 
   return (
     <div>
-      
+      <Analytics />
       {matchFound ? (
         <MyDate  matchDetails={matchDetails}/>
       ) : (
