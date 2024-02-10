@@ -1,3 +1,15 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+.gender{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+
 /* ValentinesForm.css */
 body {
   margin: 0;
@@ -38,8 +50,8 @@ label {
 
 
 button {
-  background-color: #c81b22; /* Button color */
-  color: #fff; /* Button text color */
+  background-color: #c81b22;
+  color: #fff;
   padding: 10px 20px;
   font-size: 10px;
   border: none;
@@ -49,16 +61,16 @@ button {
 }
 
 button:hover {
-  background-color: #e1bdcb; /* Button color on hover */
-  border: 2px solid #c81b22; /* Border color */
+  background-color: #e1bdcb;
+  border: 2px solid #c81b22;
   color: #c81b22;
   font-weight: bold;
-  
 }
+
 button:active {
-  transform: scale(1.1); /* Increase the size when the button is clicked */
-  transition: transform 0.5s ease; /* Add a smooth transition effect */
-  position: relative; /* Ensure positioning context for absolute positioning */
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+  position: relative;
 }
 
 /* Heart animation */
@@ -78,12 +90,13 @@ button:active {
 }
 
 button:active::before,
-button:active::after {
-  content: "❤"; /* Display a heart before and after the button text */
+button:active::after,
+button:active .small-heart {
+  content: "❤";
   position: absolute;
   font-size: 20px;
-  animation: heartBeat 1.5s ease; /* Apply the heartBeat animation */
-  color: #c81b22; /* Set the heart color to match the button border color */
+  animation: heartBeat 1.5s ease;
+  color: #c81b22;
 }
 
 button:active::before {
@@ -96,6 +109,41 @@ button:active::after {
   right: 5%;
 }
 
+@keyframes smallHeartBeat {
+  0%, 100% {
+    transform: scale(0.5);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+}
+
+.small-heart {
+  position: absolute;
+  content: "❤";
+  font-size: 20px;
+  animation: smallHeartBeat 1.5s ease;
+  color: #c81b22;
+}
+
+.small-heart1,
+.small-heart2,
+.small-heart3,
+.small-heart4,
+.small-heart5 {
+  animation: smallHeartBeat 1.5s ease;
+  display: none; /* initially hide small hearts */
+}
+
+button:active .small-heart1,
+button:active .small-heart2,
+button:active .small-heart3,
+button:active .small-heart4,
+button:active .small-heart5 {
+  display: block; /* show small hearts when button is clicked */
+}
 /* Media Query for Responsive Styles */
 @media only screen and (max-width: 768px) {
   .valentines-form-container {
@@ -109,3 +157,4 @@ button:active::after {
     font-size: 14px;
   }
 }
+

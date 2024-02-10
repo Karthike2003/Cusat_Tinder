@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getMessaging } from "firebase/messaging";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -20,6 +21,6 @@ const firebaseConfig = {
   
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const messaging = getMessaging(app);
 
-export { app };
