@@ -14,7 +14,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('public\assets\bg.jpg'); /* Adjust the path based on your project structure */
+  background-image: url('../public/bg.jpg'); /* Adjust the path based on your project structure */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
