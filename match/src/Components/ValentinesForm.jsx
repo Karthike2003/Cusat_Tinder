@@ -7,6 +7,7 @@ import {  updateDoc } from 'firebase/firestore';
 import NoDate from './NoDate';
 
 
+
 const db = getFirestore(app);
 
 const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
@@ -170,13 +171,12 @@ const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
 
 
   return (
-   <>
-   
+    <>
     {storedData ? 
     (<NoDate/> ): 
    
     ( <div className="valentines-form-container">
-      <h2>Find Your Date 🧑‍❤️‍👩</h2>
+      <h2>Find Your Date</h2>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">Name:</label>
         <input
@@ -189,9 +189,9 @@ const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
         />
 
         <div>
-          <label>Gender</label>
+          <label>Gender:</label>
           <div className='gender'>
-            <label htmlFor="male">Romeo</label>
+            <label htmlFor="male">Male</label>
             <input
               type="radio"
               id="male"
@@ -200,7 +200,7 @@ const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
               onChange={handleChange}
             />
            
-           <label htmlFor="female">Juliet</label>
+           <label htmlFor="female">Female</label>
 
             <input
               type="radio"

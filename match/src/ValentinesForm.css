@@ -65,7 +65,7 @@ label {
 
 
 button {
-  background-color: #c81b22;
+  background-color: #cc3136;
   color: #fff;
   padding: 10px 20px;
   font-size: 10px;
@@ -172,3 +172,4 @@ button:active .small-heart5 {
     font-size: 14px;
   }
 }
+

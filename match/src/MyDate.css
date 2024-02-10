@@ -10,6 +10,13 @@
     box-shadow: 5px 5px 10px rgb(184, 81, 122);
     text-align: center;
   }
+
+  .insta{
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    gap: 10px;
+  }
   
   .partner-details {
     margin-top: 20px;
@@ -20,6 +27,7 @@
     color: #6b2c3e; /* Dark rose color */
     font-style: italic;
     margin-top: 10px;
+    font-weight: bold;
   }
   
   /* Responsive Styles */
