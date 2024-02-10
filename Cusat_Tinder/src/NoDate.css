@@ -1,0 +1,37 @@
+.no-date-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color:rgba(225, 188, 203, 0.8); /* Soft rose color with higher opacity */
+    border: 2px solid #c81b22; /* Romantic pink border color */
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(255, 77, 107, 0.5); /* Gentle box shadow */
+    text-align: center;
+    color: #6b2737; /* Deep red text color for a romantic touch */
+  }
+  
+  .no-date-message {
+    font-size: 24px;
+    font-weight: bold;
+    color: #6b2c3e; /* Romantic pink color for the message */
+    margin-bottom: 10px;
+  }
+  
+  .no-date-description {
+    font-size: 18px;
+    color: #6b2c3e; /* Dark rose color for the description */
+    font-style: italic;
+    line-height: 1.5;
+  }
+  
+  .no-date-description p {
+    margin-bottom: 10px;
+  }
+  
+  .no-date-image {
+    max-width: 100%;
+    margin-top: 20px;
+    border-radius: 10px; 
+
+  }
+  
