@@ -189,7 +189,6 @@ const ValentinesForm = ({onMatchFound, setMatchDetails}) => {
         />
 
         <div>
-          <label>Gender:</label>
           <div className='gender'>
             <label htmlFor="male">Male</label>
             <input
